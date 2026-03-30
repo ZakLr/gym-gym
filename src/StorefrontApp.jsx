@@ -35,7 +35,7 @@ const copy = {
     hero: {
       eyebrow: "Premium sports nutrition for Algeria",
       title:
-        "Trusted whey, local delivery, and a checkout flow built to convert.",
+        "Original quality products with the best service.",
       text: "Shop real whey proteins, mass gainers, and recovery essentials with clear product positioning, local trust signals, and a buying experience tailored to Algerian shoppers.",
       ctaShop: "Shop products",
       ctaArticles: "Read articles",
@@ -171,7 +171,7 @@ const copy = {
     hero: {
       eyebrow: "Nutrition sportive premium pour l’Algérie",
       title:
-        "De vraies whey, une livraison locale et un checkout pensé pour convertir.",
+        "Produits Originaux de qualité avec un meilleur service",
       text: "Découvrez des whey, gainers et produits de récupération avec une présentation claire, rassurante et adaptée aux acheteurs algériens.",
       ctaShop: "Voir les produits",
       ctaArticles: "Lire les articles",
@@ -308,7 +308,7 @@ const copy = {
     hero: {
       eyebrow: "تغذية رياضية مميزة للجزائر",
       title:
-        "واي موثوق، توصيل محلي، ومسار شراء مصمم ليحوّل الاهتمام إلى طلبات.",
+        "منتجات أصلية ذات جودة عالية مع أفضل خدمة.",
       text: "اكتشف بروتينات الواي والجينر ومنتجات الاستشفاء مع عرض واضح، وعناصر ثقة محلية، وتجربة شراء تناسب المشترين في الجزائر.",
       ctaShop: "تسوق المنتجات",
       ctaArticles: "اقرأ المقالات",
@@ -475,37 +475,41 @@ function ProductCard({ product, lang, onAdd }) {
   return (
     <motion.article
       whileHover={{ y: -8 }}
-      className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 shadow-[0_20px_90px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+      className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl"
     >
-      <div className="relative h-64 overflow-hidden">
+      {/* Responsive Image Height: smaller on mobile, fixed on desktop */}
+      <div className="relative h-48 sm:h-64 shrink-0 overflow-hidden">
         <img
           src={product.image}
           alt={getLocalized(product.name, lang)}
           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(5,11,18,0.92))]" />
-        <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white backdrop-blur-xl">
-          {getLocalized(product.badge, lang)}
-        </div>
-        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-sm text-white">
-          <span>{product.brand}</span>
-          <span>★ {product.rating}</span>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050b12] to-transparent opacity-60" />
       </div>
-      <div className="p-5">
-        <h3 className="text-2xl font-semibold text-white">
-          {getLocalized(product.name, lang)}
-        </h3>
-        <p className="mt-2 text-sm leading-7 text-slate-300">
-          {getLocalized(product.description, lang)}
-        </p>
-        <div className="mt-5 flex items-center justify-between gap-3">
-          <span className="text-xl font-semibold text-lime-200">
+
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="flex-1">
+          {/* Responsive Title: text-lg on mobile, text-xl on sm+, text-2xl on lg+ */}
+          <h3 className="text-lg font-bold text-white sm:text-xl lg:text-2xl transition-colors group-hover:text-[#f2e01d]">
+            {getLocalized(product.name, lang)}
+          </h3>
+          
+          {/* Responsive Description: text-xs on mobile, text-sm on sm+ */}
+          <p className="mt-2 text-xs leading-relaxed text-slate-400 sm:mt-3 sm:text-sm">
+            {getLocalized(product.description, lang)}
+          </p>
+        </div>
+
+        {/* BOTTOM ROW */}
+        <div className="mt-6 flex items-center justify-between border-t border-white/5 pt-5 sm:mt-8">
+          {/* Responsive Price: Already has your sm:text-xl fix */}
+          <span className="text-md font-bold text-white sm:text-xl">
             {formatPrice(product.price, lang)}
           </span>
+          
           <button
             onClick={() => onAdd(product)}
-            className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-lime-200"
+            className="rounded-xl bg-[#f2e01d] px-4 py-2 text-xs font-bold text-slate-950 transition-all hover:bg-lime-300 sm:px-6 sm:py-2.5 sm:text-sm active:scale-95"
           >
             {copy[lang].labels.add}
           </button>
@@ -949,7 +953,7 @@ function Layout() {
     </div>
   );
 }
-
+import gymguyPic from "./data/gym-guy.png";  
 function HomePage() {
   const { language, currentCopy, isRTL, addToCart, setArticleSearch } =
     useStore();
@@ -1048,20 +1052,26 @@ function HomePage() {
     },
   ];
 
+    
   return (
     <>
       <section className="mx-auto mt-10 max-w-7xl px-4 pb-6 pt-4 sm:hidden mt-24">
-        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-4 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
-          <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/40 p-4">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.45em] text-[#f2e01d]/80">
+        <div className="min-h-[200px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-4 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl">
+          <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/40 p-4 min-h-[400px]">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.45em] text-[#f2e01d]/80 ">
               {currentCopy.hero.eyebrow}
             </p>
-            <h1 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white">
+            <h1 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white pt-4 pb-2 text-center">
               {currentCopy.hero.title}
             </h1>
-            <p className="mt-4 text-sm leading-7 text-slate-300">
+            {/* <p className="mt-4 text-sm leading-7 text-slate-300 pb-6">
               {currentCopy.hero.text}
-            </p>
+            </p> */}
+            <img
+              src={gymguyPic}
+              alt={getLocalized(promoSlides[0].title, language)}
+              className="h-120 w-full object-cover rounded-xl mt-4"
+            />
             <div className="mt-5 grid grid-cols-2 gap-3">
               <button
                 onClick={() => navigate("/products")}
@@ -1315,17 +1325,17 @@ function HomePage() {
           {testimonials.map((testimonial) => (
             <div
               key={getLocalized(testimonial.name, language)}
-              className="group relative flex flex-col justify-between rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-transparent p-8 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-lime-400/30 hover:bg-white/[0.12]"
+              className="group relative flex flex-col justify-between rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-transparent p-8 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#f2e01d]/30 hover:bg-white/[0.12]"
             >
               {/* Quote Icon - Adds visual interest */}
-              <div className="absolute top-6 right-8 text-4xl font-serif text-lime-400/20 group-hover:text-lime-400/40 transition-colors">
+              <div className="absolute top-6 right-8 text-4xl font-serif text-[#f2e01d]/20 group-hover:text-[#f2e01d]/40 transition-colors">
                 ”
               </div>
 
               <div className="relative">
                 <div className="flex items-center gap-3">
                   {/* Star Badge - Refined styling */}
-                  <div className="flex items-center gap-1 rounded-full bg-lime-400/10 px-2.5 py-0.5 text-xs font-bold tracking-wide text-lime-400 border border-lime-400/20">
+                  <div className="flex items-center gap-1 rounded-full bg-[#f2e01d]/10 px-2.5 py-0.5 text-xs font-bold tracking-wide text-[#f2e01d] border border-[#f2e01d]/20">
                     <span>{testimonial.rating}</span>
                     <span className="text-[10px]">★</span>
                   </div>
@@ -1340,7 +1350,7 @@ function HomePage() {
 
               <div className="mt-8 flex items-center gap-4">
                 {/* Optional: Placeholder for an avatar if you add them later */}
-                <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-lime-400 to-emerald-500 p-[1px]">
+                <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-[#f2e01d] to-emerald-500 p-[1px]">
                   <div className="flex h-full w-full items-center justify-center rounded-full bg-[#08111f] text-xs font-bold text-white">
                     {getLocalized(testimonial.name, language).charAt(0)}
                   </div>
@@ -1463,22 +1473,22 @@ function HomePage() {
           <div className="lg:sticky lg:top-24 h-fit space-y-6">
             <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-white/5 to-transparent p-8 backdrop-blur-xl sm:p-10">
               {/* Decorative background glow */}
-              <div className="absolute -right-10 -top-10 h-32 w-32 bg-lime-400/10 blur-[50px]" />
+              <div className="absolute -right-10 -top-10 h-32 w-32 bg-[#f2e01d]/10 blur-[50px]" />
 
-              <p className="text-xs font-bold uppercase tracking-[0.4em] text-lime-400">
+              <p className="text-xs font-bold uppercase tracking-[0.4em] text-[#f2e01d]">
                 Buying guide
               </p>
               <h3 className="mt-6 text-3xl font-bold tracking-tight text-white xl:text-5xl">
                 Answers that help you{" "}
-                <span className="text-lime-400">buy faster</span>.
+                <span className="text-[#f2e01d]">buy faster</span>.
               </h3>
               <p className="mt-6 text-base leading-relaxed text-slate-400">
                 {currentCopy.sections.faqText}
               </p>
 
               {/* Payment Highlight Box */}
-              <div className="mt-10 flex items-start gap-4 rounded-2xl border border-lime-400/20 bg-lime-400/5 p-5 transition-colors hover:bg-lime-400/10">
-                <div className="flex-shrink-0 text-lime-400">
+              <div className="mt-10 flex items-start gap-4 rounded-2xl border border-[#f2e01d]/20 bg-[#f2e01d]/5 p-5 transition-colors hover:bg-[#f2e01d]/10">
+                <div className="flex-shrink-0 text-[#f2e01d]">
                   {/* Simple Credit Card Icon SVG */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1517,10 +1527,10 @@ function HomePage() {
                 <div className="flex items-start justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-mono text-lime-400/60">
+                      <span className="text-xs font-mono text-[#f2e01d]/60">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <div className="h-px w-8 bg-white/10 group-hover:w-12 transition-all group-hover:bg-lime-400/50" />
+                      <div className="h-px w-8 bg-white/10 group-hover:w-12 transition-all group-hover:bg-[#f2e01d]/50" />
                     </div>
                     <h3 className="text-xl font-bold text-white group-hover:text-lime-50 transition-colors">
                       {getLocalized(faq.question, language)}
@@ -1551,7 +1561,7 @@ function HomePage() {
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <button
                 onClick={() => navigate("/products")}
-                className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-lime-400 px-8 py-4 text-sm font-bold text-slate-950 transition-all hover:scale-105 hover:bg-[#f2e01d] active:scale-95"
+                className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-[#f2e01d] px-8 py-4 text-sm font-bold text-slate-950 transition-all hover:scale-105 hover:bg-[#f2e01d] active:scale-95"
               >
                 {currentCopy.labels.viewProducts}
                 <span className="transition-transform group-hover:translate-x-1">
