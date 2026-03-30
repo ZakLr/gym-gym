@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color: #ffffff;
+    background: #06111d;
+    font-family:
+      "Avenir Next", "Segoe UI Variable", "Segoe UI", "Noto Sans", Tahoma,
+      sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background:
+      radial-gradient(circle at top, rgba(163, 230, 53, 0.12), transparent 35%),
+      #06111d;
+    color: #e2e8f0;
+  }
+
+  body[dir="rtl"] {
+    font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  ::selection {
+    background: #eded15;
+    color: #050b12;
+  }
+}
